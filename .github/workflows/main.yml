@@ -21,8 +21,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install playwright schedule
-          python -m playwright install
+          pip install playwright
+          playwright install
 
       - name: Run bot
         run: python test.py
