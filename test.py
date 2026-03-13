@@ -1,28 +1,13 @@
-name: Attendance Bot
+from playwright.sync_api import sync_playwright
 
-on:
-  schedule:
-    - cron: '0 4 * * 1-5'   # 9:30 AM IST
-    - cron: '0 13 * * 1-5'  # 6:30 PM IST
-  workflow_dispatch:
+print("Attendance bot started")
 
-jobs:
-  run-bot:
-    runs-on: ubuntu-latest
+with sync_playwright() as p:
+    browser = p.chromium.launch(headless=True)
+    page = browser.new_page()
 
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+    page.goto("https://hrms.happymanbusiness.com/users/sign_in")
 
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
+    print("Opened HRMS login page")
 
-      - name: Install dependencies
-        run: |
-          pip install playwright
-          playwright install
-
-      - name: Run bot
-        run: python test.py
+    browser.close()
