@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install playwright
-          playwright install
+          playwright install --with-deps
 
       - name: Run bot
         run: python test.py
